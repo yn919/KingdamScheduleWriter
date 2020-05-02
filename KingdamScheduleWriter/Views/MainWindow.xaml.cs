@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KingdamScheduleWriter.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace KingdamScheduleWriter.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel ViewModel;
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Closing += MainWindow_Closing;
+
+            ViewModel = new MainViewModel();
+            ViewModel.Start();
+            DataContext = ViewModel;
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ViewModel.End();
         }
     }
 }

@@ -34,29 +34,15 @@ namespace KingdamScheduleWriter.Models
             }
         }
 
-        private int _StartTime = 0;
-        public int StartTime
+        private string _Time = string.Empty;
+        public string Time
         {
-            get => _StartTime;
+            get => _Time;
             set
             {
-                if(_StartTime != value)
+                if (_Time != value)
                 {
-                    _StartTime = value;
-                    RaisePropertyChange();
-                }
-            }
-        }
-
-        private int _EndTime = 0;
-        public int EndTime
-        {
-            get => _EndTime;
-            set
-            {
-                if (_EndTime != value)
-                {
-                    _EndTime = value;
+                    _Time = value;
                     RaisePropertyChange();
                 }
             }

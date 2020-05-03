@@ -16,6 +16,7 @@ namespace KingdamScheduleWriter.ViewModels
 
         public ReactiveCommand AddCommand { get; }
         public ReactiveCommand<ScheduleDataViewModel> RemoveCommand { get; }
+        public ReactiveCommand ExportCommand { get; }
 
         public MainViewModel()
         {
@@ -28,6 +29,9 @@ namespace KingdamScheduleWriter.ViewModels
 
             RemoveCommand = new ReactiveCommand<ScheduleDataViewModel>();
             RemoveCommand.Subscribe(x => InnerModel.RemoveSchedule(x.GetInnerModel()));
+
+            ExportCommand = new ReactiveCommand();
+            ExportCommand.Subscribe(() => InnerModel.Writer.Write());
         }
 
         public void Start()
@@ -51,6 +55,7 @@ namespace KingdamScheduleWriter.ViewModels
         {
             AddCommand.Dispose();
             RemoveCommand.Dispose();
+            ExportCommand.Dispose();
             Schedules.Dispose();
         }
     }

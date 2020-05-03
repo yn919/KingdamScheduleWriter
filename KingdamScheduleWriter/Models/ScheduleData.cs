@@ -6,7 +6,7 @@ namespace KingdamScheduleWriter.Models
 {
     public class ScheduleData : PropertyChangeObj
     {
-        private DateTime _Date = DateTime.Today;
+        private DateTime _Date = DateTime.Today.AddMonths(2);
         public DateTime Date
         {
             get => _Date;
@@ -20,8 +20,8 @@ namespace KingdamScheduleWriter.Models
             }
         }
 
-        private String _Place = string.Empty;
-        public String Place
+        private string _Place = string.Empty;
+        public string Place
         {
             get => _Place;
             set

@@ -12,14 +12,14 @@ namespace KingdamScheduleWriter.ViewModels
         private ScheduleData InnerModel;
         public ScheduleData GetInnerModel() => InnerModel;
 
-        public string[] Places = new string[]
+        public string[] Places => new string[]
         {
             "スポセン第1",
             "スポセン第2",
             "上納池"
         };
 
-        public string[] Times = new string[]
+        public string[] Times => new string[]
         {
             "19-21",
             "17-19",

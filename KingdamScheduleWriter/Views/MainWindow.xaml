@@ -5,23 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KingdamScheduleWriter"
         mc:Ignorable="d"
-        Title="KingdamScheduleWriter" Height="450" Width="400">
+        Title="KingdamScheduleWriter" Height="350" Width="400">
     <DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Vertical" Margin="0,10">
             <Button Width="100" Height="30" Content="Add" Command="{Binding AddCommand}" />
-            <Button Width="100" Height="30" Content="Export" Margin="0,10,0,0" />
+            <Button Width="100" Height="30" Content="Export" Command="{Binding ExportCommand}" Margin="0,10,0,0" />
         </StackPanel>
-        <ItemsControl ItemsSource="{Binding Schedules}" >
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Height="30" Margin="0,5">
-                        <DatePicker Width="100" Height="30" SelectedDate="{Binding Date.Value}" Margin="5,0" />
-                        <ComboBox Width="100" Height="30" ItemsSource="{Binding Places}" SelectedItem="{Binding Place.Value}" Margin="5,0" />
-                        <ComboBox Width="50" Height="30" ItemsSource="{Binding Times}" SelectedItem="{Binding Time.Value}" Margin="5,0" />
-                        <Button Width="30" Height="30" Content="x" Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=DockPanel}}" Margin="5,0" />
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding Schedules}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Height="30" Margin="0,5">
+                            <DatePicker Width="100" Height="30" SelectedDate="{Binding Date.Value}" Margin="5,0" />
+                            <ComboBox Width="100" Height="30" ItemsSource="{Binding Places}" SelectedItem="{Binding Place.Value}" Margin="5,0" />
+                            <ComboBox Width="100" Height="30" ItemsSource="{Binding Times}" SelectedItem="{Binding Time.Value}" Margin="5,0" />
+                            <Button Width="30" Height="30" Content="x" 
+                                Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=DockPanel}}" Margin="5,0"
+                                CommandParameter="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </DockPanel>
 </Window>

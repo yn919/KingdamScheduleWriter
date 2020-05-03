@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Windows;
 
 namespace KingdamScheduleWriter.Models
 {
@@ -19,21 +20,21 @@ namespace KingdamScheduleWriter.Models
         {
             if (Schedules.Count <= 0) return;
 
-            using (StreamWriter sw = new StreamWriter(
-                    Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "KingdamShedule.txt"),
-                    true,
-                    Encoding.UTF8))
-            {
-                var firstData = Schedules[0];
-                var month = $"{firstData.Date.Month}月の予定";
-                sw.WriteLine(month);
+            string exportText = string.Empty;
 
-                foreach(var schedule in Schedules)
-                {
-                    var scheduleText = $"{schedule.Date.ToString("M/d(ddd)")} {schedule.Place} {schedule.Time}";
-                    sw.WriteLine(scheduleText);
-                }
+            var firstData = Schedules[0];
+            var month = $"{firstData.Date.Month}月の予定\r\n";
+            exportText += month;
+
+            foreach (var schedule in Schedules)
+            {
+                var scheduleText = $"{schedule.Date.ToString("M/d(ddd)")} {schedule.Place} {schedule.Time}";
+                exportText += $"{scheduleText}\r\n";
             }
+
+            Clipboard.SetText(exportText, TextDataFormat.Text);
+
+            MessageBox.Show($"{exportText}\r\n\r\nクリップボードにコピーしました。", "Export", MessageBoxButton.OK);
         }
     }
 }

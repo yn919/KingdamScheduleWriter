@@ -21,12 +21,12 @@ namespace KingdamScheduleWriter.ViewModels
 
         public string[] Times => new string[]
         {
-            "19-21",
-            "17-19",
-            "15-17",
-            "13-15",
-            "11-13",
             "9-11",
+            "11-13",
+            "13-15",
+            "15-17",
+            "17-19",
+            "19-21"
         };
 
         public ReactiveProperty<DateTime> Date { get; }

@@ -18,7 +18,12 @@ namespace KingdamScheduleWriter.Models
 
         public void Start()
         {
+            Schedules.Clear();
 
+            Schedules.Add(new ScheduleData());
+            Schedules.Add(new ScheduleData());
+            Schedules.Add(new ScheduleData());
+            Schedules.Add(new ScheduleData());
         }
 
         public void End()

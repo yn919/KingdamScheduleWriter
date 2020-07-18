@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace KingdamScheduleWriter.Models
+namespace WriterCore.Models
 {
     public class PropertyChangeObj : INotifyPropertyChanged
     {
@@ -14,7 +14,7 @@ namespace KingdamScheduleWriter.Models
         {
             if(propertyName != null)
             {
-                PropertyChanged!.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

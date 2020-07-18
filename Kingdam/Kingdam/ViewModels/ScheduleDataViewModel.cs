@@ -5,9 +5,9 @@ using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using WriterCore.Models;
 
-namespace KingdamScheduleWriter.ViewModels
+namespace Kingdam.ViewModels
 {
-    class ScheduleDataViewModel : IDisposable
+    class ScheduleDataViewModel
     {
         private ScheduleData InnerModel;
         public ScheduleData GetInnerModel() => InnerModel;

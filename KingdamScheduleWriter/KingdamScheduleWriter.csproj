@@ -10,4 +10,8 @@
     <PackageReference Include="ReactiveProperty" Version="6.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WriterCore\WriterCore.csproj" />
+  </ItemGroup>
+
 </Project>

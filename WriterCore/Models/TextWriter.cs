@@ -5,10 +5,12 @@ using System.IO;
 using System.Text;
 using System.Windows;
 
-namespace KingdamScheduleWriter.Models
+namespace WriterCore.Models
 {
     public class TextWriter
     {
+        public event Action<string> CompleteWrite;
+
         private ObservableCollection<ScheduleData> Schedules;
 
         public TextWriter(ObservableCollection<ScheduleData> schedules)
@@ -32,9 +34,7 @@ namespace KingdamScheduleWriter.Models
                 exportText += $"{scheduleText}\r\n";
             }
 
-            Clipboard.SetText(exportText, TextDataFormat.Text);
-
-            MessageBox.Show($"{exportText}\r\n\r\nクリップボードにコピーしました。", "Export", MessageBoxButton.OK);
+            CompleteWrite?.Invoke(exportText);
         }
     }
 }

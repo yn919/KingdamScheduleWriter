@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KingdamScheduleWriter.Models
+namespace WriterCore.Models
 {
     public class ScheduleData : PropertyChangeObj
     {

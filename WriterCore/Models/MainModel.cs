@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace KingdamScheduleWriter.Models
+namespace WriterCore.Models
 {
     public class MainModel
     {

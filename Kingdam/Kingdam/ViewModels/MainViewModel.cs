@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Reactive.Bindings;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Reactive.Bindings;
-using Reactive.Bindings.Extensions;
-using System.Reactive.Linq;
 using WriterCore.Models;
-using System.Windows;
 
-namespace KingdamScheduleWriter.ViewModels
+namespace Kingdam.ViewModels
 {
-    class MainViewModel : PropertyChangeObj, IDisposable
+    class MainViewModel
     {
         private MainModel InnerModel;
 
@@ -38,9 +35,7 @@ namespace KingdamScheduleWriter.ViewModels
 
         private void Writer_CompleteWrite(string text)
         {
-            Clipboard.SetText(text, TextDataFormat.Text);
-
-            MessageBox.Show($"{text}\r\n\r\nクリップボードにコピーしました。", "Export", MessageBoxButton.OK);
+            
         }
 
         public void Start()
@@ -52,7 +47,7 @@ namespace KingdamScheduleWriter.ViewModels
         {
             InnerModel.End();
 
-            foreach(var schedule in Schedules)
+            foreach (var schedule in Schedules)
             {
                 schedule.Dispose();
             }

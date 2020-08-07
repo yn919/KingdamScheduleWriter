@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kingdam.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,9 +14,24 @@ namespace Kingdam.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private MainViewModel MainViewModel;
+
         public MainPage()
         {
             InitializeComponent();
+            MainViewModel = new MainViewModel();
+            MainViewModel.Start();
+
+            this.BindingContext = MainViewModel;
+            this.Disappearing += MainPage_Disappearing;
+        }
+
+        private void MainPage_Disappearing(object sender, EventArgs e)
+        {
+            if(MainViewModel != null)
+            {
+                //MainViewModel.End();
+            }
         }
     }
 }

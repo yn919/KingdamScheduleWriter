@@ -30,7 +30,7 @@ namespace WriterCore.Models
 
             foreach (var schedule in Schedules)
             {
-                var scheduleText = $"{schedule.Date.ToString("M/d(ddd)")} {schedule.Place} {schedule.Time}";
+                var scheduleText = $"{schedule.Date.ToString("M/d(ddd)", System.Globalization.CultureInfo.CreateSpecificCulture("ja-JP"))} {schedule.Place} {schedule.Time}";
                 exportText += $"{scheduleText}\r\n";
             }
 

@@ -7,7 +7,7 @@ using WriterCore.Models;
 
 namespace KingdamScheduleWriter.ViewModels
 {
-    class ScheduleDataViewModel : IDisposable
+    class ScheduleDataViewModel : PropertyChangeObj, IDisposable
     {
         private ScheduleData InnerModel;
         public ScheduleData GetInnerModel() => InnerModel;

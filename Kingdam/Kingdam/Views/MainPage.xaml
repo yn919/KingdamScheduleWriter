@@ -4,12 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Kingdam.ViewModels"
+             xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              mc:Ignorable="d"
              x:Class="Kingdam.Views.MainPage">
-    <ContentPage.BindingContext>
-        <vm:MainViewModel />
-    </ContentPage.BindingContext>
-    
+
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS">0,20,0,0</On>
@@ -17,12 +15,23 @@
     </ContentPage.Padding>
     
     <StackLayout Orientation="Vertical">
-        <ListView ItemsSource="{Binding Schedules}">
+        <ListView ItemsSource="{Binding Schedules}" RowHeight="80" >
+            <ListView.Behaviors>
+                <behaviorsPack:SelectedItemBehavior Command="{Binding SelectedItemCommand}" />
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal">
-                            <DatePicker Date="{Binding Date}" />
+                    <ViewCell >
+                        <StackLayout Orientation="Horizontal" Margin="5">
+                            <Label Text="{Binding DisplayDate}" FontSize="Medium" FontAttributes="Bold" 
+                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.3}"
+                                   VerticalTextAlignment="Center" BackgroundColor="Beige" />
+                            <Label Text="{Binding Place.Value}" FontSize="Medium" FontAttributes="Bold" 
+                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.4}"
+                                   VerticalTextAlignment="Center" />
+                            <Label Text="{Binding Time.Value}" FontSize="Medium" FontAttributes="Bold"
+                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.3}"
+                                   VerticalTextAlignment="Center" BackgroundColor="Aquamarine"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

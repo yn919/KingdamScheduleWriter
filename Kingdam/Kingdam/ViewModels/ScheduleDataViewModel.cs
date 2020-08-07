@@ -7,7 +7,7 @@ using WriterCore.Models;
 
 namespace Kingdam.ViewModels
 {
-    class ScheduleDataViewModel
+    class ScheduleDataViewModel : PropertyChangeObj, IDisposable
     {
         private ScheduleData InnerModel;
         public ScheduleData GetInnerModel() => InnerModel;
@@ -30,6 +30,7 @@ namespace Kingdam.ViewModels
         };
 
         public ReactiveProperty<DateTime> Date { get; }
+        public string DisplayDate => Date.Value.ToString("M/d(ddd)", System.Globalization.CultureInfo.CreateSpecificCulture("ja-JP"));
         public ReactiveProperty<string> Place { get; }
         public ReactiveProperty<string> Time { get; }
 

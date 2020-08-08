@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Kingdam.Views"
              xmlns:vm="clr-namespace:Kingdam.ViewModels"
              xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              mc:Ignorable="d"
@@ -13,6 +14,11 @@
             <On Platform="iOS">0,20,0,0</On>
         </OnPlatform>
     </ContentPage.Padding>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="{local:ImageResource Kingdam.Resources.Share.png}" Order="Primary" 
+                     Command="{Binding ExportCommand}"/>
+    </ContentPage.ToolbarItems>
     
     <StackLayout Orientation="Vertical">
         <ListView ItemsSource="{Binding Schedules}" RowHeight="80" >
@@ -25,18 +31,22 @@
                         <StackLayout Orientation="Horizontal" Margin="5">
                             <Label Text="{Binding DisplayDate}" FontSize="Medium" FontAttributes="Bold" 
                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.3}"
-                                   VerticalTextAlignment="Center" BackgroundColor="Beige" />
+                                   VerticalTextAlignment="Center" BackgroundColor="Beige" MinimumWidthRequest="90"/>
                             <Label Text="{Binding Place.Value}" FontSize="Medium" FontAttributes="Bold" 
                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.4}"
-                                   VerticalTextAlignment="Center" />
+                                   MinimumWidthRequest="120" VerticalTextAlignment="Center" />
                             <Label Text="{Binding Time.Value}" FontSize="Medium" FontAttributes="Bold"
                                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.3}"
-                                   VerticalTextAlignment="Center" BackgroundColor="Aquamarine"/>
+                                   VerticalTextAlignment="Center" BackgroundColor="Aquamarine" MinimumWidthRequest="80"/>
+                            <ImageButton Source="{local:ImageResource Kingdam.Resources.More.png}" BackgroundColor="Transparent" 
+                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}},Path=ShowItemMenuCommand}" CommandParameter="{Binding}"
+                                         HorizontalOptions="End" VerticalOptions="Center" Scale="0.3"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Margin="5" Text="+" FontSize="Medium" Command="{Binding AddCommand}" HorizontalOptions="Fill" />
     </StackLayout>
 
 </ContentPage>

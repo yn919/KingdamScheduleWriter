@@ -1,9 +1,8 @@
 ﻿using Kingdam.Views;
 using Reactive.Bindings;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using WriterCore.Models;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Kingdam.ViewModels
@@ -18,6 +17,7 @@ namespace Kingdam.ViewModels
         public ReactiveCommand<ScheduleDataViewModel> RemoveCommand { get; }
         public ReactiveCommand ExportCommand { get; }
         public ReactiveCommand<ScheduleDataViewModel> SelectedItemCommand { get; }
+        public ReactiveCommand<ScheduleDataViewModel> ShowItemMenuCommand { get; }
 
         public MainViewModel()
         {
@@ -38,15 +38,29 @@ namespace Kingdam.ViewModels
             SelectedItemCommand = new ReactiveCommand<ScheduleDataViewModel>();
             SelectedItemCommand.Subscribe(async x =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new EditSchedulePage());
+                EditSchedulePage editPage = new EditSchedulePage();
+                editPage.BindingContext = x;
 
-                System.Diagnostics.Debug.WriteLine("open page");
+                await Application.Current.MainPage.Navigation.PushModalAsync(editPage);
+            });
+
+            ShowItemMenuCommand = new ReactiveCommand<ScheduleDataViewModel>();
+            ShowItemMenuCommand.Subscribe(async x =>
+            {
+                bool action = await Application.Current.MainPage.DisplayAlert(null, "削除しますか？", "はい", "いいえ");
+                if (action == true)
+                {
+                    InnerModel.RemoveSchedule(x.GetInnerModel());
+                }
             });
         }
 
-        private void Writer_CompleteWrite(string text)
+        private async void Writer_CompleteWrite(string text)
         {
-            
+            await Share.RequestAsync(new ShareTextRequest()
+            {
+                Text = text
+            });
         }
 
         public void Start()
@@ -72,6 +86,7 @@ namespace Kingdam.ViewModels
             RemoveCommand.Dispose();
             ExportCommand.Dispose();
             SelectedItemCommand.Dispose();
+            ShowItemMenuCommand.Dispose();
             Schedules.Dispose();
         }
     }

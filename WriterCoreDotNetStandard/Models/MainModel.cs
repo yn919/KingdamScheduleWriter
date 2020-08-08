@@ -28,7 +28,7 @@ namespace WriterCore.Models
 
         public void End()
         {
-
+            Schedules.Clear();
         }
 
         public void AddSchedule()

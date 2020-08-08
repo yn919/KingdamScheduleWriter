@@ -23,15 +23,6 @@ namespace Kingdam.Views
             MainViewModel.Start();
 
             this.BindingContext = MainViewModel;
-            this.Disappearing += MainPage_Disappearing;
-        }
-
-        private void MainPage_Disappearing(object sender, EventArgs e)
-        {
-            if(MainViewModel != null)
-            {
-                //MainViewModel.End();
-            }
         }
     }
 }

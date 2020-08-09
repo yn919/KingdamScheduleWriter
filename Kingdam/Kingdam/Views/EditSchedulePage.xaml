@@ -3,13 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Kingdam.Views"
              mc:Ignorable="d"
              x:Class="Kingdam.Views.EditSchedulePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+
+    <StackLayout Orientation="Vertical" Margin="10" Spacing="50">
+        <StackLayout Orientation="Vertical">
+            <Label Text="日 :" FontSize="Subtitle" />
+            <DatePicker Date="{Binding Date.Value}" Format="M/d(ddd)" Margin="50,0,0,0" FontSize="Large" />
         </StackLayout>
-    </ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Label Text="場所 :" FontSize="Subtitle" />
+            <Picker ItemsSource="{Binding Places}" SelectedItem="{Binding Place.Value}" Margin="50,0,0,0" FontSize="Large" />
+        </StackLayout>
+        <StackLayout Orientation="Vertical">
+            <Label Text="時間 :" FontSize="Subtitle" />
+            <Picker ItemsSource="{Binding Times}" SelectedItem="{Binding Time.Value}" Margin="50,0,0,0" FontSize="Large" />
+        </StackLayout>
+    </StackLayout>
 </ContentPage>

@@ -7,7 +7,8 @@
              xmlns:vm="clr-namespace:Kingdam.ViewModels"
              xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              mc:Ignorable="d"
-             x:Class="Kingdam.Views.MainPage">
+             x:Class="Kingdam.Views.MainPage"
+             Title="予定表">
 
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -20,33 +21,43 @@
                      Command="{Binding ExportCommand}"/>
     </ContentPage.ToolbarItems>
     
-    <StackLayout Orientation="Vertical">
+    <StackLayout Orientation="Vertical" Margin="10">
         <ListView ItemsSource="{Binding Schedules}" RowHeight="80" >
             <ListView.Behaviors>
                 <behaviorsPack:SelectedItemBehavior Command="{Binding SelectedItemCommand}" />
             </ListView.Behaviors>
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell >
-                        <StackLayout Orientation="Horizontal" Margin="5">
-                            <Label Text="{Binding DisplayDate}" FontSize="Medium" FontAttributes="Bold" 
-                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.3}"
-                                   VerticalTextAlignment="Center" BackgroundColor="Beige" MinimumWidthRequest="90"/>
-                            <Label Text="{Binding Place.Value}" FontSize="Medium" FontAttributes="Bold" 
-                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.4}"
-                                   MinimumWidthRequest="120" VerticalTextAlignment="Center" />
-                            <Label Text="{Binding Time.Value}" FontSize="Medium" FontAttributes="Bold"
-                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Factor=.3}"
-                                   VerticalTextAlignment="Center" BackgroundColor="Aquamarine" MinimumWidthRequest="80"/>
-                            <ImageButton Source="{local:ImageResource Kingdam.Resources.More.png}" BackgroundColor="Transparent" 
+                        <Grid Margin="5" >
+                            <Grid.GestureRecognizers>
+                                <SwipeGestureRecognizer Direction="Right" 
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=RemoveCommand}" CommandParameter="{Binding}" />
+                            </Grid.GestureRecognizers>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding DisplayDate}" FontSize="Large" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Place.Value}" FontSize="Large" VerticalTextAlignment="Center" />
+                            <Label Grid.Row="0" Grid.Column="2" Text="{Binding Time.Value}" FontSize="Large" VerticalTextAlignment="Center" />
+                            <ImageButton Grid.Row="0" Grid.Column="3" Source="{local:ImageResource Kingdam.Resources.More.png}" BackgroundColor="Transparent" Padding="5" 
                                          Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}},Path=ShowItemMenuCommand}" CommandParameter="{Binding}"
-                                         HorizontalOptions="End" VerticalOptions="Center" Scale="0.3"/>
-                        </StackLayout>
+                                         />
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Margin="5" Text="+" FontSize="Medium" Command="{Binding AddCommand}" HorizontalOptions="Fill" />
+        <Button HeightRequest="100" Text="+" FontSize="Large" Command="{Binding AddCommand}" HorizontalOptions="Fill" VerticalOptions="End"/>
     </StackLayout>
 
 </ContentPage>

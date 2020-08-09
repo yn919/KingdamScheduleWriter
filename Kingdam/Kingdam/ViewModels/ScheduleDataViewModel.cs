@@ -39,6 +39,7 @@ namespace Kingdam.ViewModels
             this.InnerModel = innerModel;
 
             Date = InnerModel.ToReactivePropertyAsSynchronized(x => x.Date);
+            Date.Subscribe(x => RaisePropertyChange(nameof(DisplayDate)));
             Place = InnerModel.ToReactivePropertyAsSynchronized(x => x.Place);
             Time = InnerModel.ToReactivePropertyAsSynchronized(x => x.Time);
         }

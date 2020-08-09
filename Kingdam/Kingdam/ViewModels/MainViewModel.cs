@@ -41,7 +41,7 @@ namespace Kingdam.ViewModels
                 EditSchedulePage editPage = new EditSchedulePage();
                 editPage.BindingContext = x;
 
-                await Application.Current.MainPage.Navigation.PushModalAsync(editPage);
+                await Application.Current.MainPage.Navigation.PushAsync(editPage);
             });
 
             ShowItemMenuCommand = new ReactiveCommand<ScheduleDataViewModel>();

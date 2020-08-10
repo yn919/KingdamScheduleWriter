@@ -31,11 +31,6 @@
                 <DataTemplate>
                     <ViewCell >
                         <Grid Margin="5" >
-                            <Grid.GestureRecognizers>
-                                <SwipeGestureRecognizer Direction="Right" 
-                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=RemoveCommand}" CommandParameter="{Binding}" />
-                            </Grid.GestureRecognizers>
-                            
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
@@ -57,7 +52,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button HeightRequest="100" Text="+" FontSize="Large" Command="{Binding AddCommand}" HorizontalOptions="Fill" VerticalOptions="End"/>
+        <Button CornerRadius="50" HeightRequest="90" Text="+" FontSize="Large" Margin="0,0,10,10"
+                BackgroundColor="#2196F3" TextColor="White"
+                Command="{Binding AddCommand}" HorizontalOptions="End" VerticalOptions="End"/>
     </StackLayout>
 
 </ContentPage>
